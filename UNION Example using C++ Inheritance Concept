@@ -35,7 +35,7 @@ public:
     }
 };
 int main(){
-    department d(1,2,"any");
+    department d(0,0,"-");
     student s("ahmed",1,2,22.5,17.5);
     employee e("abdlrhman",3,4,100);
     cout << "Student data: \n" 
