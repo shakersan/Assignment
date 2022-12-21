@@ -1,0 +1,83 @@
+#include <iostream>
+using namespace std;
+class linkedlist{
+    struct Node{
+        int data;
+        Node* next;
+    };
+    Node* head = NULL;
+    Node* temp = NULL;
+public:
+    void insertsorted(int element){
+        Node* newnode = new Node;
+        newnode->data = element;
+        if (head == NULL
+            || (head)->data
+                >= newnode->data) {
+            newnode->next = head;
+            head = newnode;
+        }
+        else {
+            Node* current;
+            current = head;
+            while (current->next != NULL
+                    && current->next->data
+                        < newnode->data) {
+                current = current->next;
+            }
+            newnode->next = current->next;
+            current->next = newnode;
+        }
+    }
+    void remove(int element){
+        Node *current, *prevoius;
+        current = prevoius = head;
+        if (current->data = element)
+        {
+            head = current->next;
+            delete current;
+            return;
+        }else{
+            while (current->data != element)
+            {
+                prevoius = current;
+                current = current->next;
+            }
+            prevoius->next = current->next;
+            delete current;
+        }
+    }
+    void display()
+    {
+        temp = head;
+        while (temp != NULL) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+    }
+    bool search(int element){
+        temp = head;
+        while (temp != NULL)
+        {
+            if (temp->data == element)
+            {
+                return true;
+            }
+            temp = temp->next;
+        }
+        return false;
+    }
+};
+int main(){
+    linkedlist ls;
+    ls.insertsorted(2);
+    ls.insertsorted(5);
+    ls.insertsorted(1);
+    ls.display(); cout << endl;
+    ls.search(1) ? cout <<"Yes" : cout <<"No";
+    cout << endl;
+    ls.remove(1);
+    ls.display(); cout << endl;
+    ls.search(1) ? cout <<"Yes" : cout <<"No";
+    return 0;
+}
