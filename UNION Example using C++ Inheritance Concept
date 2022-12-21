@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+//base class
+class department{
+public:
+    // common variables
+    int flag;
+    int code;
+    string name;
+    // constructor to set data
+    department(int f, int c, string n){
+        this->flag = f;
+        this->code = c;
+        this->name = n;
+    }
+};
+//derived classes
+class student: public department{
+public:
+    float grade1;
+    float grade2;
+    student (string n, int c, int f, float g1, float g2
+    ): department(f, c, n)
+    {
+        grade1 = g1;    grade2 = g2;
+    }
+};
+class employee: public department{
+public:
+    float salary;
+    employee (string n, int c, int f, float s
+    ): department(f, c, n)
+    {
+        salary = s;
+    }
+};
+int main(){
+    department d(1,2,"any");
+    student s("ahmed",1,2,22.5,17.5);
+    employee e("abdlrhman",3,4,100);
+    cout << "Student data: \n" 
+    << "Name: "<< s.name << endl
+    << "Code: "<< s.code << endl
+    << "Flag: "<< s.flag << endl
+    << "Grades: "<< s.grade1 << " " << s.grade2 << endl;
+    cout << "employee data: \n" 
+    << "Name: "<< e.name << endl
+    << "Code: "<< e.code << endl
+    << "Flag: "<< e.flag << endl
+    << "salary: "<< e.salary << endl;
+    return 0;
+}
