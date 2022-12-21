@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+struct point{
+    float x;
+    float y;
+};
+point addpoint(point p1, point p2){
+    point p3;
+    p3.x = p1.x + p2.x;
+    p3.y = p1.y + p2.y;
+    return p3;
+}
+class stack{
+    #define n   5  
+    point p[n];
+    int top = 0;
+public:
+    int counter = 0;
+    bool isfull(){
+        return (top == n);
+    }
+    void reset(){
+        top = 0;
+    }
+    void push(point p){
+        if (! isfull())
+        {
+            this->p[++top] = p;
+            counter++;
+        }else
+        {
+            cout << "Overload!";
+        }
+    }
+    point pop(){
+        return p[top--];
+        --counter;
+    }
+};
+int main(){
+    point p1,p2,p3;
+    stack s;
+    p1.x = 1;    p1.y = 2;
+    p2.x = 3;    p2.y = 4;
+    p3 = addpoint(p1,p2);
+    s.reset();
+    s.push(p1);
+    s.push(p2);
+    s.push(p3);
+    while (s.counter--)
+    {
+        point pop_point = s.pop();
+        cout << pop_point.x <<" " << pop_point.y << endl;
+    }
+    return 0;
+}
