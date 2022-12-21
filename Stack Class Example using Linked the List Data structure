@@ -1,0 +1,98 @@
+#include <iostream>
+using namespace std;
+struct point{
+    float x;
+    float y;
+};
+point addpoint(point p1, point p2){
+    point p3;
+    p3.x = p1.x + p2.x;
+    p3.y = p1.y + p2.y;
+    return p3;
+}
+class linkedlist{
+    struct Node{
+        point data;
+        Node* next;
+    };
+    Node* head = NULL;
+    Node* temp = NULL;
+public:
+    void insertsorted(point element){
+        Node* newnode = new Node;
+        newnode->data.x = element.x;
+        newnode->data.y = element.y;
+        if (head == NULL
+            || (head)->data.x
+                >= newnode->data.x && (head)->data.y
+                >= newnode->data.y) {
+            newnode->next = head;
+            head = newnode;
+        }
+        else {
+            Node* current;
+            current = head;
+            while (current->next != NULL
+                    && current->next->data.x
+                        < newnode->data.x && current->next->data.y
+                        < newnode->data.y) {
+                current = current->next;
+            }
+            newnode->next = current->next;
+            current->next = newnode;
+        }
+    }
+    void remove(point element){
+        Node *current, *prevoius;
+        current = prevoius = head;
+        if (current->data.x == element.x && current->data.y == element.y)
+        {
+            head = current->next;
+            delete current;
+            return;
+        }else{
+            while (current->data.x != element.x && current->data.y != element.y)
+            {
+                prevoius = current;
+                current = current->next;
+            }
+            prevoius->next = current->next;
+            delete current;
+        }
+    }
+    void display()
+    {
+        temp = head;
+        while (temp != NULL) {
+            cout << temp->data.x << " " << temp->data.y
+            <<endl;
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+    bool search(point element){
+        temp = head;
+        while (temp != NULL)
+        {
+            if (temp->data.x == element.x)
+            {
+                if (temp->data.y == element.y){
+                    return true;}
+            }
+            temp = temp->next;
+        }
+        return false;
+    }
+};
+int main(){
+    point p1,p2,p3;
+    linkedlist ls;
+    p1.x = 1;    p1.y = 2;
+    p2.x = 3;    p2.y = 4;
+    p3 = addpoint(p1,p2);
+    ls.insertsorted(p1);
+    ls.insertsorted(p2);
+    ls.insertsorted(p3);
+    ls.display();
+    return 0;
+}
